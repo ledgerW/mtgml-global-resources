@@ -1,0 +1,14 @@
+service: mtgml-database
+
+custom:
+  globalDecksTable: global-decks
+  globalCardsTable: global-cards
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+
+resources:
+  # DynamoDB Tables
+  - ${file(resources/dynamodb-tables.yml)}
