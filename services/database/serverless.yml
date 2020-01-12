@@ -1,4 +1,4 @@
-service: mtgml-database
+service: mtgml-global-database
 
 custom:
   globalDecksTable: global-decks
