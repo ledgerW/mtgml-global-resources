@@ -6,7 +6,7 @@ custom:
 
 provider:
   name: aws
-  stage: dev
+  stage: prod
   region: us-east-1
 
 resources:
