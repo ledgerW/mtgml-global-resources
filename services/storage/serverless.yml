@@ -1,0 +1,13 @@
+service: mtgml-global-storage
+
+custom:
+  pricesBucket: global-prices
+
+provider:
+  name: aws
+  stage: prod
+  region: us-east-1
+
+resources:
+  # DynamoDB Tables
+  - ${file(resources/s3buckets.yml)}
