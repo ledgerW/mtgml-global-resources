@@ -4,7 +4,7 @@ Resources:
     Properties:
       DomainName: ${self:custom.domainName}
       ElasticsearchClusterConfig:
-        InstanceType: ${self:custom.instanceType.${self:custom.stage}, self:custom.instanceType.dev}
+        InstanceType: ${self:custom.instanceType.${self:custom.stage}, self:custom.instanceType.prod}
         InstanceCount: 1
       EBSOptions:
         EBSEnabled: true
