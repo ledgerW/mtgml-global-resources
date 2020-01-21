@@ -3,18 +3,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: ${self:custom.pricesBucket}
-      PolicyDocument:
-        Statement:
-          -
-            Action:
-              - s3:PutObject
-              - s3:GetObject
-              - s3:DeleteObject
-            Effect: Allow
-            Resource:
-              - "*"
-            Principal:
-              - "*"
       # Set the CORS policy
       CorsConfiguration:
         CorsRules:
@@ -30,6 +18,27 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
+  PricesBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+              - s3:DeleteObject
+            Resource:
+              Fn::Join:
+                - ""
+                -
+                  - "arn:aws:s3:::"
+                  -
+                    Ref: PricesBucket
+                  - "/*"
+            Principal: "*"
 
 # Print out the name of the bucket that is created
 Outputs:
