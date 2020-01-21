@@ -21,8 +21,9 @@ Resources:
   PricesBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
+      Bucket:
+        Ref: PricesBucket
       PolicyDocument:
-        Version: 2012-10-17
         Statement:
           -
             Effect: Allow
