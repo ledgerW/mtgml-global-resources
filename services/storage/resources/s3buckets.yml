@@ -18,6 +18,44 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
+  SharedObjectsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:custom.sharedObjectsBucket}
+      # Set the CORS policy
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
+  MLDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:custom.mlDataBucket}
+      # Set the CORS policy
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
   PricesBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:

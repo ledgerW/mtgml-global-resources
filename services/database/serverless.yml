@@ -10,7 +10,7 @@ custom:
 
   dynamodb:
     stages:
-      - prod
+      - dev
     start:
       port: 8000
       inMemory: true
@@ -20,7 +20,7 @@ custom:
 provider:
   name: aws
   runtime: python3.7
-  stage: prod
+  stage: dev
   region: us-east-1
 
 resources:
