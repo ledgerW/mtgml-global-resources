@@ -1,11 +1,17 @@
 service: mtgml-global-storage
 
 custom:
-  pricesBucket: global-prices
+  stage: ${opt:stage, self:provider.stage}
+  pricesBucket: ${self:custom.stage}-global-prices
+  sharedObjectsBucket: ${self:custom.stage}-shared-objects
+  mlDataBucket: ${self:custom.stage}-ml-data-bucket
+  globalCardsBucket: ${self:custom.stage}-global-cards-bucket
+  globalDecksBucket: ${self:custom.stage}-global-decks-bucket
 
 provider:
   name: aws
-  stage: prod
+  runtime: python3.7
+  stage: dev
   region: us-east-1
 
 resources:

@@ -56,28 +56,66 @@ Resources:
               - DELETE
               - HEAD
             MaxAge: 3000
-  PricesBucketPolicy:
-    Type: AWS::S3::BucketPolicy
+  GlobalCardsBucket:
+    Type: AWS::S3::Bucket
     Properties:
-      Bucket:
-        Ref: PricesBucket
-      PolicyDocument:
-        Statement:
+      BucketName: ${self:custom.globalCardsBucket}
+      # Set the CORS policy
+      CorsConfiguration:
+        CorsRules:
           -
-            Effect: Allow
-            Action:
-              - s3:PutObject
-              - s3:GetObject
-              - s3:DeleteObject
-            Resource:
-              Fn::Join:
-                - ""
-                -
-                  - "arn:aws:s3:::"
-                  -
-                    Ref: PricesBucket
-                  - "/*"
-            Principal: "*"
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
+  GlobalDecksBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ${self:custom.globalDecksBucket}
+      # Set the CORS policy
+      CorsConfiguration:
+        CorsRules:
+          -
+            AllowedOrigins:
+              - '*'
+            AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+              - POST
+              - DELETE
+              - HEAD
+            MaxAge: 3000
+  #PricesBucketPolicy:
+  #  Type: AWS::S3::BucketPolicy
+  #  Properties:
+  #    Bucket:
+  #      Ref: PricesBucket
+  #    PolicyDocument:
+  #      Statement:
+  #        -
+  #          Effect: Allow
+  #          Action:
+  #            - s3:PutObject
+  #            - s3:GetObject
+  #            - s3:DeleteObject
+  #          Resource:
+  #            Fn::Join:
+  #              - ""
+  #              -
+  #                - "arn:aws:s3:::"
+  #                -
+  #                  Ref: PricesBucket
+  #                - "/*"
+  #          Principal: "*"
 
 # Print out the name of the bucket that is created
 Outputs:
@@ -87,10 +125,66 @@ Outputs:
         - PricesBucket
         - Arn
     Export:
-      Name: PricesBucketArn
+      Name: ${self:custom.stage}-PricesBucketArn
 
   PricesBucketName:
     Value:
       Ref: PricesBucket
     Export:
-      Name: PricesBucket
+      Name: ${self:custom.stage}-PricesBucket
+
+  SharedObjectsBucketArn:
+    Value:
+       Fn::GetAtt:
+        - SharedObjectsBucket
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-SharedObjectsBucketArn
+
+  SharedObjectsBucketName:
+    Value:
+      Ref: SharedObjectsBucket
+    Export:
+      Name: ${self:custom.stage}-SharedObjectsBucket
+
+  MLDataBucketArn:
+    Value:
+       Fn::GetAtt:
+        - MLDataBucket
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-MLDataBucketArn
+
+  MLDataBucketName:
+    Value:
+      Ref: MLDataBucket
+    Export:
+      Name: ${self:custom.stage}-MLDataBucket
+
+  GlobalCardsBucketArn:
+    Value:
+       Fn::GetAtt:
+        - GlobalCardsBucket
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-GlobalCardsBucketArn
+
+  GlobalCardsBucketName:
+    Value:
+      Ref: GlobalCardsBucket
+    Export:
+      Name: ${self:custom.stage}-GlobalCardsBucket
+
+  GlobalDecksBucketArn:
+    Value:
+       Fn::GetAtt:
+        - GlobalDecksBucket
+        - Arn
+    Export:
+      Name: ${self:custom.stage}-GlobalDecksBucketArn
+
+  GlobalDecksBucketName:
+    Value:
+      Ref: GlobalDecksBucket
+    Export:
+      Name: ${self:custom.stage}-GlobalDecksBucket
