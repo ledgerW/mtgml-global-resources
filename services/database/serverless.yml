@@ -1,11 +1,25 @@
 service: mtgml-global-database
 
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
 custom:
   globalDecksTable: global-decks
   globalCardsTable: global-cards
 
+  dynamodb:
+    stages:
+      - prod
+    start:
+      port: 8000
+      inMemory: true
+      convertEmptyValues: true
+      migrate: true
+
 provider:
   name: aws
+  runtime: python3.7
   stage: prod
   region: us-east-1
 
