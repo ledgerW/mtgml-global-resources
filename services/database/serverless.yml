@@ -5,6 +5,7 @@ plugins:
   - serverless-offline
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   globalDecksTable: ${self:custom.stage}-global-decks
   globalCardsTable: ${self:custom.stage}-global-cards
 
