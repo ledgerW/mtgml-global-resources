@@ -5,8 +5,8 @@ plugins:
   - serverless-offline
 
 custom:
-  globalDecksTable: global-decks
-  globalCardsTable: global-cards
+  globalDecksTable: ${self:custom.stage}-global-decks
+  globalCardsTable: ${self:custom.stage}-global-cards
 
   dynamodb:
     stages:
